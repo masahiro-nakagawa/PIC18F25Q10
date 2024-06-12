@@ -86,17 +86,21 @@ void __interrupt() INTERRUPT_InterruptManager (void)
     }
     else if(INTCONbits.PEIE == 1)
     {
-        if(PIE4bits.TMR2IE == 1 && PIR4bits.TMR2IF == 1)
-        {
-            TMR2_ISR();
-        } 
-        else if(PIE3bits.TX1IE == 1 && PIR3bits.TX1IF == 1)
+        if(PIE3bits.TX1IE == 1 && PIR3bits.TX1IF == 1)
         {
             EUSART1_TxInterruptHandler();
         } 
         else if(PIE3bits.RC1IE == 1 && PIR3bits.RC1IF == 1)
         {
             EUSART1_RxInterruptHandler();
+        } 
+        else if(PIE1bits.ADIE == 1 && PIR1bits.ADIF == 1)
+        {
+            ADCC_ISR();
+        } 
+        else if(PIE4bits.TMR2IE == 1 && PIR4bits.TMR2IF == 1)
+        {
+            TMR2_ISR();
         } 
         else
         {

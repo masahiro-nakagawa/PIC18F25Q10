@@ -45,6 +45,7 @@
 #include "../system/interrupt.h"
 #include "../system/clock.h"
 #include "../linclient/lin_client_app.h"
+#include "../adc/adcc.h"
 /**
  * @ingroup systemdriver
  * @brief Initializes the system module.

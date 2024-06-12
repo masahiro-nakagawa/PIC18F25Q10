@@ -56,11 +56,10 @@ int main(void)
     // Disable the Peripheral Interrupts 
     //INTERRUPT_PeripheralInterruptDisable(); 
 
-
+    unsigned int val;
     while(1)
     {
         __delay_ms(10);
-        IO_RA5_Toggle();
         LinClient_handler();
     }    
 }

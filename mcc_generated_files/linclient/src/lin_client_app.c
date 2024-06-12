@@ -36,7 +36,7 @@
 */
 
 #include "../lin_client_app.h"
-
+#include "../../adc/adcc.h"
 void LinClient_Initialize(void){
 
     LinClient_init(TABLE_SIZE, scheduleTable, processLinClient);
@@ -52,6 +52,7 @@ void processLinClient(void){
       case Serial_Analyzer:
             break; 
       case Serial_Pod:
+            Serial_Pod_Data[0] = ADCC_GetSingleConversion(0);
             break; 
         default:
             break;
