@@ -90,6 +90,14 @@ void __interrupt() INTERRUPT_InterruptManager (void)
         {
             TMR2_ISR();
         } 
+        else if(PIE3bits.TX1IE == 1 && PIR3bits.TX1IF == 1)
+        {
+            EUSART1_TxInterruptHandler();
+        } 
+        else if(PIE3bits.RC1IE == 1 && PIR3bits.RC1IF == 1)
+        {
+            EUSART1_RxInterruptHandler();
+        } 
         else
         {
             //Unhandled Interrupt
