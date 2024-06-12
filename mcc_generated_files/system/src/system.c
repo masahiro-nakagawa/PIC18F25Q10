@@ -42,5 +42,6 @@ void SYSTEM_Initialize(void)
     EUSART1_Initialize();
     TMR2_Initialize();
     INTERRUPT_Initialize();
+    LinClient_Initialize();
 }
 

@@ -39,7 +39,7 @@
 #include "../../uart/eusart1.h"
 #include "../../timer/tmr2.h"
 
-#define READ_TIMEOUT    15  //ms
+#define READ_TIMEOUT    1500  //ms
 
 static void (*LIN_processData)(void);
 

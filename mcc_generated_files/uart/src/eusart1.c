@@ -40,17 +40,17 @@
   Section: Macro Declarations
 */
 
-#define EUSART1_TX_BUFFER_SIZE () //buffer size should be 2^n
+#define EUSART1_TX_BUFFER_SIZE (8) //buffer size should be 2^n
 #define EUSART1_TX_BUFFER_MASK (EUSART1_TX_BUFFER_SIZE - 1) 
 
-#define EUSART1_RX_BUFFER_SIZE () //buffer size should be 2^n
+#define EUSART1_RX_BUFFER_SIZE (8) //buffer size should be 2^n
 #define EUSART1_RX_BUFFER_MASK (EUSART1_RX_BUFFER_SIZE - 1)
 
 /**
   Section: Driver Interface
  */
 
-const uart_drv_interface_t EUSART1 = {
+const uart_drv_interface_t UART1 = {
     .Initialize = &EUSART1_Initialize,
     .Deinitialize = &EUSART1_Deinitialize,
     .Read = &EUSART1_Read,
@@ -125,10 +125,10 @@ void EUSART1_Initialize(void)
 
     //ABDEN disabled; WUE disabled; BRG16 16bit_generator; SCKP Non-Inverted; 
     BAUD1CON = 0x48; 
-    //ADDEN disabled; CREN enabled; SREN disabled; RX9 9-bit; SPEN enabled; 
-    RC1STA = 0xD0; 
-    //TX9D 0x0; BRGH hi_speed; SENDB sync_break_complete; SYNC asynchronous; TXEN enabled; TX9 9-bit; CSRC client; 
-    TX1STA = 0x66; 
+    //ADDEN disabled; CREN enabled; SREN disabled; RX9 8-bit; SPEN enabled; 
+    RC1STA = 0x90; 
+    //TX9D 0x0; BRGH hi_speed; SENDB sync_break_complete; SYNC asynchronous; TXEN enabled; TX9 8-bit; CSRC client; 
+    TX1STA = 0x26; 
     //SPBRGL 130; 
     SP1BRGL = 0x82; 
     //SPBRGH 6; 
