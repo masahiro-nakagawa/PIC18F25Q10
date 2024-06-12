@@ -99,7 +99,7 @@ linclient_rx_state_t LinClient_handler(void){
 
     switch(LIN_rxState){
         case LIN_RX_IDLE:
-            if(EUSART1_is_rx_ready() > 0){
+            if(EUSART1_IsRxReady() > 0){
                 //Start Timer
                 LinClient_startTimer(READ_TIMEOUT); 
                 LIN_rxInProgress = true;
@@ -107,7 +107,7 @@ linclient_rx_state_t LinClient_handler(void){
             }
             break;
         case LIN_RX_BREAK:
-            if(EUSART1_is_rx_ready() > 0){
+            if(EUSART1_IsRxReady() > 0){
                 if(LinClient_breakCheck() == true){  //Read Break
                     LIN_rxState = LIN_RX_SYNC;
                 } else {
@@ -116,7 +116,7 @@ linclient_rx_state_t LinClient_handler(void){
             }
             break;
         case LIN_RX_SYNC:
-            if(EUSART1_is_rx_ready() > 0){
+            if(EUSART1_IsRxReady() > 0){
                 if(EUSART1_Read() == 0x55){  //Read sync - discard
                     LIN_rxState = LIN_RX_PID;
                 } else {
@@ -125,7 +125,7 @@ linclient_rx_state_t LinClient_handler(void){
             }
             break;
         case LIN_RX_PID:
-            if(EUSART1_is_rx_ready() > 0){
+            if(EUSART1_IsRxReady() > 0){
                 LIN_packet.PID = EUSART1_Read();
 
                 //check LIN Parity bits
@@ -145,7 +145,7 @@ linclient_rx_state_t LinClient_handler(void){
             }
             break;
         case LIN_RX_DATA:
-            if(EUSART1_is_rx_ready() > 0){
+            if(EUSART1_IsRxReady() > 0){
                 LIN_packet.data[rxDataIndex] = EUSART1_Read();
                 if(++rxDataIndex >= LIN_packet.length){
                     //received all data bytes
@@ -155,7 +155,7 @@ linclient_rx_state_t LinClient_handler(void){
             }
             break;
         case LIN_RX_CHECKSUM:
-            if(EUSART1_is_rx_ready() > 0){
+            if(EUSART1_IsRxReady() > 0){
                 LIN_packet.checksum = EUSART1_Read();
                 if(LIN_packet.checksum != LinClient_getChecksum(LIN_packet.length, LIN_packet.PID, LIN_packet.data)) {
                     LIN_rxState = LIN_RX_ERROR;
@@ -176,7 +176,7 @@ linclient_rx_state_t LinClient_handler(void){
             LIN_rxInProgress = false;
             memset(LIN_packet.rawPacket, 0, sizeof(LIN_packet.rawPacket));  //clear receive data
         case LIN_RX_WAIT:
-            if(EUSART1_isTxDone()){
+            if(EUSART1_IsTxDone()){
                 LinClient_enableRx();
                 LIN_rxState = LIN_RX_IDLE;
             } else {
@@ -307,13 +307,14 @@ void LinClient_stopTimer(void){
 }
 
 void LinClient_enableRx(void){
-    EUSART1_enableRx();
-    EUSART1_enableRxInterrupt();
+
+    EUSART1_ReceiveEnable();
+    EUSART1_ReceiveInterruptEnable();
 }
 
 void LinClient_disableRx(void){
-    EUSART1_disableRx();
-    EUSART1_disableRxInterrupt();
+    EUSART1_ReceiveDisable();
+    EUSART1_ReceiveInterruptDisable();
 }
 
 bool LinClient_breakCheck(void){
