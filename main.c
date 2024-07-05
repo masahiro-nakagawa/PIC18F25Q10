@@ -61,5 +61,8 @@ int main(void)
     {
         __delay_ms(10);
         LinClient_handler();
+        
+        
+        IO_RA5_Toggle();
     }    
 }

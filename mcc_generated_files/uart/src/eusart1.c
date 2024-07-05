@@ -240,11 +240,11 @@ inline void EUSART1_TransmitInterruptDisable(void)
     PIE3bits.TX1IE = 0; 
 }
 
-inline void EUSART1_ReceiveInterruptEnable(void)
+  void EUSART1_ReceiveInterruptEnable(void) //https://stackoverflow.com/questions/5229343/how-to-declare-an-inline-function-in-c99-multi-file-project
 {
     PIE3bits.RC1IE = 1;
 }
-inline void EUSART1_ReceiveInterruptDisable(void)
+ void EUSART1_ReceiveInterruptDisable(void)
 {
     PIE3bits.RC1IE = 0; 
 }

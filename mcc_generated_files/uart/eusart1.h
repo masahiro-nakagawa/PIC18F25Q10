@@ -10,7 +10,7 @@
  * @version EUSART1 Driver Version 3.0.0
 */
 /*
-© [2024] Microchip Technology Inc. and its subsidiaries.
+ï¿½ [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -176,7 +176,7 @@ inline void EUSART1_ReceiveEnable(void);
  * @param None.
  * @return None.
  */
-inline void EUSART1_ReceiveDisable(void);
+extern inline void EUSART1_ReceiveDisable(void);
 
 /**
  * @ingroup eusart1
@@ -200,7 +200,7 @@ void EUSART1_TransmitInterruptDisable(void);
  * @param None.
  * @return None.
  */
-inline void EUSART1_ReceiveInterruptEnable(void);
+ void EUSART1_ReceiveInterruptEnable(void); 
 
 /**
  * @ingroup eusart1
@@ -208,7 +208,7 @@ inline void EUSART1_ReceiveInterruptEnable(void);
  * @param None.
  * @return None.
  */
-inline void EUSART1_ReceiveInterruptDisable(void);
+ void EUSART1_ReceiveInterruptDisable(void);
 
 /**
  * @ingroup eusart1
