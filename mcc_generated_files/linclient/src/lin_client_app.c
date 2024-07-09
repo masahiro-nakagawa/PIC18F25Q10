@@ -52,7 +52,16 @@ void processLinClient(void){
       case Serial_Analyzer:
             break; 
       case Serial_Pod:
-            Serial_Pod_Data[0] = ADCC_GetSingleConversion(0);
+            Serial_Pod_Data[0] = (uint8_t)ADCC_GetSingleConversion(0);
+            break; 
+      case Serial_hiro:
+           Serial_hiro_Data[0] = 123; 
+            break; 
+      case broadcast:
+            break; 
+      case multicast:
+            break; 
+      case multipleresponse:
             break; 
         default:
             break;
