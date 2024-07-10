@@ -47,29 +47,23 @@
 */
 
 typedef enum {
-    Serial_Analyzer=0,
-    Serial_Pod=1,
-    Serial_hiro=2,
-    broadcast=3,
-    multicast=5,
-    multipleresponse=7
+    mtos=30,
+    broadcast=31,
+    getresponse=10,
+    stos=32
 }linclient_cmd_t;
 
-uint8_t Serial_Analyzer_Data[1];
-uint8_t Serial_Pod_Data[1];
-uint8_t Serial_hiro_Data[1];
+uint8_t mtos_Data[1];
 uint8_t broadcast_Data[1];
-uint8_t multicast_Data[1];
-uint8_t multipleresponse_Data[1];
+uint8_t getresponse_Data[1];
+uint8_t stos_Data[1];
 
 const linclient_rx_cmd_t scheduleTable[] = {
     //Command, Type, TX/RX Length, Data Address
-   {Serial_Analyzer,RECEIVE,1,Serial_Analyzer_Data},
-   {Serial_Pod,TRANSMIT,1,Serial_Pod_Data},
-   {Serial_hiro,TRANSMIT,1,Serial_hiro_Data},
+   {mtos,RECEIVE,1,mtos_Data},
    {broadcast,RECEIVE,1,broadcast_Data},
-   {multicast,RECEIVE,1,multicast_Data},
-   {multipleresponse,TRANSMIT,1,multipleresponse_Data}
+   {getresponse,TRANSMIT,1,getresponse_Data},
+   {stos,TRANSMIT,1,stos_Data}
 }; 
 #define TABLE_SIZE  (sizeof(scheduleTable)/sizeof(linclient_rx_cmd_t))
 /**

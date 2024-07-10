@@ -37,6 +37,7 @@
 
 #include "../lin_client_app.h"
 #include "../../adc/adcc.h"
+#include "../../system/pins.h"
 void LinClient_Initialize(void){
 
     LinClient_init(TABLE_SIZE, scheduleTable, processLinClient);
@@ -49,19 +50,13 @@ void processLinClient(void){
 
     cmd = LinClient_getPacket(tempRxData);
     switch(cmd){
-      case Serial_Analyzer:
-            break; 
-      case Serial_Pod:
-            Serial_Pod_Data[0] = (uint8_t)ADCC_GetSingleConversion(0);
-            break; 
-      case Serial_hiro:
-           Serial_hiro_Data[0] = 123; 
+      case mtos:
             break; 
       case broadcast:
             break; 
-      case multicast:
+      case getresponse:
             break; 
-      case multipleresponse:
+      case stos:
             break; 
         default:
             break;
