@@ -37,25 +37,46 @@
 
 #include "../lin_client_app.h"
 #include "../../adc/adcc.h"
+#include "../../system/pins.h"
 void LinClient_Initialize(void){
 
     LinClient_init(TABLE_SIZE, scheduleTable, processLinClient);
     
 }
 
+void display(uint8_t tempRxData){
+    if(tempRxData & 0x01)
+        IO_RB0_SetHigh();
+    else
+        IO_RB0_SetLow();
+    if(tempRxData & 0x02)
+        IO_RB1_SetHigh();
+    else
+        IO_RB1_SetLow();
+    if(tempRxData & 0x04)
+        IO_RB2_SetHigh();
+    else
+        IO_RB2_SetLow();
+    if(tempRxData & 0x08)
+        IO_RB3_SetHigh();
+    else
+        IO_RB3_SetLow();
+}
 void processLinClient(void){
     uint8_t tempRxData[8];
     uint8_t cmd;
 
     cmd = LinClient_getPacket(tempRxData);
     switch(cmd){
-      case broadcast:
-            break; 
-      case  getresponse:
-            break; 
-      case stos:
-            break; 
-        default:
-            break;
+    case broadcast:  //master broadcasts data
+        display(tempRxData[0]);
+        break; 
+    case  getresponse:  //master requests update. Collision expected
+        break; 
+    case stos:   //slave1 sends to slave2
+        display(tempRxData[0]);
+        break; 
+    default:
+        break;
     }
 }
