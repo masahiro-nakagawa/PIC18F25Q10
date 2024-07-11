@@ -51,6 +51,22 @@ void processLinClient(void){
     cmd = LinClient_getPacket(tempRxData);
     switch(cmd){
       case mtos:
+          if(tempRxData[0] & 0x01)
+              IO_RB0_SetHigh();
+          else
+              IO_RB0_SetLow();
+          if(tempRxData[0] & 0x02)
+              IO_RB1_SetHigh();
+          else
+              IO_RB1_SetLow();
+          if(tempRxData[0] & 0x04)
+              IO_RB2_SetHigh();
+          else
+              IO_RB2_SetLow();
+          if(tempRxData[0] & 0x08)
+              IO_RB3_SetHigh();
+          else
+              IO_RB3_SetLow();          
             break; 
       case broadcast:
             break; 
